@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI 审讯室</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
     <div class="app-shell">
       <header class="hero">
         <div class="hero-copy">
@@ -15,6 +23,20 @@
           <p>
             一宗密室失窃案，三名嫌疑人。你只有 8 次提问机会，在矛盾、破绽和隐藏线索里找出真正说谎的人。
           </p>
+          <div class="hero-stats">
+            <div class="stat-pill">
+              <span class="stat-value">01</span>
+              <span class="stat-label">单案试玩</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-value">03</span>
+              <span class="stat-label">嫌疑人</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-value">08</span>
+              <span class="stat-label">提问机会</span>
+            </div>
+          </div>
         </div>
         <div class="case-card">
           <div class="case-label">案件代号</div>
@@ -22,6 +44,11 @@
           <p>
             昨晚 21:00 到 21:20，创业公司原型机在会议室失窃。门禁正常、窗户反锁，只有内部人员能接触到。
           </p>
+          <div class="case-tags">
+            <span class="chip">密室失窃</span>
+            <span class="chip">内部作案</span>
+            <span class="chip">时间线矛盾</span>
+          </div>
         </div>
       </header>
 
@@ -36,8 +63,21 @@
 
         <section class="panel dialogue-panel">
           <div class="panel-title-row">
-            <h2 id="activeSuspectName">选择一名嫌疑人开始审讯</h2>
+            <div>
+              <h2 id="activeSuspectName">选择一名嫌疑人开始审讯</h2>
+              <p id="suspectStatus" class="status-copy">切换嫌疑人后即可开始追问时间、动机和原型机细节。</p>
+            </div>
             <button id="hintButton" class="ghost-button" type="button">查看规则</button>
+          </div>
+
+          <div class="progress-strip">
+            <div class="progress-copy">
+              <span>审讯进度</span>
+              <strong id="progressText">0 / 8</strong>
+            </div>
+            <div class="progress-track">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
           </div>
 
           <div id="chatWindow" class="chat-window">
@@ -61,7 +101,7 @@
         <section class="panel evidence-panel">
           <div class="panel-title-row">
             <h2>线索板</h2>
-            <span class="tag">实时记录</span>
+            <span id="evidenceCounter" class="tag">0 条记录</span>
           </div>
           <ul id="evidenceList" class="evidence-list"></ul>
         </section>

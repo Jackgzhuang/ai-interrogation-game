@@ -127,11 +127,15 @@ const evidenceMap = {
 const elements = {
   suspectList: document.getElementById("suspectList"),
   activeSuspectName: document.getElementById("activeSuspectName"),
+  suspectStatus: document.getElementById("suspectStatus"),
   chatWindow: document.getElementById("chatWindow"),
   chatForm: document.getElementById("chatForm"),
   questionInput: document.getElementById("questionInput"),
   questionCounter: document.getElementById("questionCounter"),
+  progressText: document.getElementById("progressText"),
+  progressBar: document.getElementById("progressBar"),
   evidenceList: document.getElementById("evidenceList"),
+  evidenceCounter: document.getElementById("evidenceCounter"),
   accusationOptions: document.getElementById("accusationOptions"),
   accuseButton: document.getElementById("accuseButton"),
   endingCard: document.getElementById("endingCard"),
@@ -144,6 +148,7 @@ function init() {
   renderSuspects();
   renderAccusationOptions();
   renderEvidence();
+  renderProgress();
   bindEvents();
 }
 
@@ -190,6 +195,8 @@ function renderAccusationOptions() {
 
 function renderEvidence() {
   const items = Array.from(state.foundEvidence);
+  elements.evidenceCounter.textContent = `${items.length} 条记录`;
+
   if (!items.length) {
     elements.evidenceList.innerHTML = '<li class="evidence-item">还没有记录到有效线索。试着追问时间、门锁、咖啡渍、包装结构。</li>';
     return;
@@ -204,6 +211,7 @@ function selectSuspect(suspectId) {
   state.activeSuspectId = suspectId;
   const suspect = getActiveSuspect();
   elements.activeSuspectName.textContent = `正在审讯：${suspect.name}`;
+  elements.suspectStatus.textContent = `${suspect.role} · ${suspect.vibe}`;
   renderSuspects();
   addMessage("suspect", `${suspect.name}：${suspect.intro}`);
 }
@@ -237,6 +245,7 @@ function handleQuestion(event) {
 
   state.questionsLeft -= 1;
   elements.questionCounter.textContent = `剩余提问 ${state.questionsLeft} 次`;
+  renderProgress();
   elements.questionInput.value = "";
 
   maybeUnlockEvidence(suspect, topic, response);
@@ -340,6 +349,13 @@ function handleAccusation() {
     elements.endingCard.innerHTML = `指认失败。${accused.name} 不是偷走原型机的人。${truth}`;
     addSystemMessage(`审讯结论：指认失败。${truth}`);
   }
+}
+
+function renderProgress() {
+  const asked = 8 - state.questionsLeft;
+  const ratio = (asked / 8) * 100;
+  elements.progressText.textContent = `${asked} / 8`;
+  elements.progressBar.style.width = `${ratio}%`;
 }
 
 function getActiveSuspect() {
