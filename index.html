@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 审讯室</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">AI 互动剧情解谜游戏 MVP</span>
+          <h1>AI 审讯室</h1>
+          <p>
+            一宗密室失窃案，三名嫌疑人。你只有 8 次提问机会，在矛盾、破绽和隐藏线索里找出真正说谎的人。
+          </p>
+        </div>
+        <div class="case-card">
+          <div class="case-label">案件代号</div>
+          <div class="case-title">海雾大厦 1704</div>
+          <p>
+            昨晚 21:00 到 21:20，创业公司原型机在会议室失窃。门禁正常、窗户反锁，只有内部人员能接触到。
+          </p>
+        </div>
+      </header>
+
+      <main class="main-grid">
+        <section class="panel suspects-panel">
+          <div class="panel-title-row">
+            <h2>嫌疑人</h2>
+            <span id="questionCounter" class="counter">剩余提问 8 次</span>
+          </div>
+          <div id="suspectList" class="suspect-list"></div>
+        </section>
+
+        <section class="panel dialogue-panel">
+          <div class="panel-title-row">
+            <h2 id="activeSuspectName">选择一名嫌疑人开始审讯</h2>
+            <button id="hintButton" class="ghost-button" type="button">查看规则</button>
+          </div>
+
+          <div id="chatWindow" class="chat-window">
+            <div class="system-bubble">
+              玩法：先切换嫌疑人，再自由输入问题。不同的人会根据设定、心虚程度和你问到的关键词给出不同回答。
+            </div>
+          </div>
+
+          <form id="chatForm" class="chat-form">
+            <input
+              id="questionInput"
+              type="text"
+              maxlength="120"
+              placeholder="例如：你昨晚 9 点 10 分在哪里？"
+              autocomplete="off"
+            />
+            <button id="askButton" type="submit">提问</button>
+          </form>
+        </section>
+
+        <section class="panel evidence-panel">
+          <div class="panel-title-row">
+            <h2>线索板</h2>
+            <span class="tag">实时记录</span>
+          </div>
+          <ul id="evidenceList" class="evidence-list"></ul>
+        </section>
+
+        <section class="panel accusation-panel">
+          <div class="panel-title-row">
+            <h2>最终指认</h2>
+            <span class="tag warm">限一次</span>
+          </div>
+          <p class="accusation-copy">
+            当你认为已经抓到破绽，就提交指认。系统会根据你是否锁定真凶和是否收集到关键线索给出结局。
+          </p>
+          <div id="accusationOptions" class="accusation-options"></div>
+          <button id="accuseButton" class="accuse-button" type="button">提交指认</button>
+          <div id="endingCard" class="ending-card hidden"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="rulesDialog" class="rules-dialog">
+      <div class="rules-content">
+        <h3>这个版本包含什么</h3>
+        <ul>
+          <li>1 个完整案件</li>
+          <li>3 名可审问嫌疑人</li>
+          <li>自由文本提问 + 关键词反应</li>
+          <li>自动解锁线索与破绽</li>
+          <li>最终指认与结局反馈</li>
+        </ul>
+        <button id="closeRulesButton" class="ghost-button" type="button">继续审讯</button>
+      </div>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
