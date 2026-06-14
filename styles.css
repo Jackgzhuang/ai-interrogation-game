@@ -223,6 +223,56 @@ h1 {
   font-weight: 600;
 }
 
+.scan-card {
+  margin-top: 22px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 126px;
+  gap: 14px;
+  align-items: center;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(94, 68, 44, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.scan-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+}
+
+.scan-copy p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.scan-link {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.scan-link:hover {
+  color: var(--accent-strong);
+}
+
+.scan-qr {
+  width: 126px;
+  height: 126px;
+  padding: 8px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
 .main-grid {
   display: grid;
   grid-template-columns: 0.95fr 1.35fr;
@@ -647,6 +697,15 @@ button:hover:not(:disabled) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .scan-card {
+    grid-template-columns: 1fr;
+  }
+
+  .scan-qr {
+    width: 140px;
+    height: 140px;
+  }
+
   .stat-pill {
     min-width: 0;
   }
@@ -697,6 +756,15 @@ button:hover:not(:disabled) {
 
   .case-tags {
     gap: 8px;
+  }
+
+  .scan-card {
+    padding: 14px;
+  }
+
+  .scan-qr {
+    width: 132px;
+    height: 132px;
   }
 
   .chip,
